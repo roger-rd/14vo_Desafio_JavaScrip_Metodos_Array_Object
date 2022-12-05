@@ -20,22 +20,41 @@ const render = () => {
     totalTareas.innerHTML = `${tareas.length}`
     totalRealizadas.innerHTML=  totalCompleted();
 
-console.log(tareas.length)
-console.log(totalCompleted())
-
-
     tareas.forEach((tarea)=>{
-        
+        if(tarea.check ===false){
         listaTareas.innerHTML += `
-        <tr>
-        <td> ${tarea.id}</td>
-        <td> ${tarea.nombreTarea} </td>
-        <td><input type="checkbox" class= "check" onclick="checkTarea(${tarea.id})id="${tarea.id}"></td>
+        <tr><td> ${tarea.id}</td><td> ${tarea.nombreTarea} </td>
+        <td><input type="checkbox" class= "check" onclick="checkTarea(${tarea.id})"id="${tarea.id}" ></td>
         <td> <button class= "btnX" onclick="deleteTarea(${tarea.id})" id="${tarea.id}">❌</button></td>
         </tr>`
+        }else{
+        listaTareas.innerHTML += `
+        <tr> <td> ${tarea.id}</td><td> ${tarea.nombreTarea} </td>
+        <td><input type="checkbox" class= "check" checked onclick="checkTarea(${tarea.id})"id="${tarea.id}" ></td>
+        <td> <button class= "btnX" onclick="deleteTarea(${tarea.id})" id="${tarea.id}">❌</button></td>
+        </tr>`
+console.log(tarea.id)
+        }
     })
+
 }
+
 render()
+
+const checkTarea = (chekeador) => {
+    tareas.forEach((tarea) => {
+        if (tarea.id === chekeador) {
+            if (tarea.check === false) {
+                tarea.check = true;
+                render();
+            } else {
+                tarea.check = false;
+                render();
+            }
+        }
+    });
+};
+
 
 btnAgregar.addEventListener("click", () => {
     if (inputNuevaTarea.value == "") {
@@ -51,9 +70,10 @@ btnAgregar.addEventListener("click", () => {
     }
 })
 
-
 const deleteTarea = (btnX) =>{
     tareas = tareas.filter((elim)=> elim.id !== btnX);
     render();
+   
 }
+
 
