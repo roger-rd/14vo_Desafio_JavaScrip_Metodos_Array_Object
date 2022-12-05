@@ -14,7 +14,6 @@ const totalCompleted = ()=>{
     arrayCompleted = tareas.filter((completed)=>completed.check!==false);
     return arrayCompleted.length};
 
-
 const render = () => {
     listaTareas.innerHTML = "";
     totalTareas.innerHTML = `${tareas.length}`
@@ -33,12 +32,9 @@ const render = () => {
         <td><input type="checkbox" class= "check" checked onclick="checkTarea(${tarea.id})"id="${tarea.id}" ></td>
         <td> <button class= "btnX" onclick="deleteTarea(${tarea.id})" id="${tarea.id}">❌</button></td>
         </tr>`
-console.log(tarea.id)
         }
     })
-
 }
-
 render()
 
 const checkTarea = (chekeador) => {
@@ -73,7 +69,6 @@ btnAgregar.addEventListener("click", () => {
 const deleteTarea = (btnX) =>{
     tareas = tareas.filter((elim)=> elim.id !== btnX);
     render();
-   
 }
 
 
